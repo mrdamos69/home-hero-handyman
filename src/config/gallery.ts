@@ -1,73 +1,92 @@
 /**
- * Gallery projects. Replace the placeholder images in /public/images with real
- * photos of your work (see public/images/README.md), then update titles and
- * categories here. Categories drive the filter buttons automatically.
+ * Gallery projects — real photos of completed work, currently served from the
+ * business's public Yelp profile (all photos were taken and published by the
+ * business itself).
+ *
+ * To make the site independent from Yelp's CDN, download these photos and
+ * place them in /public/images, then change each `src` to a local path like
+ * "/images/kitchen-hood.jpg". Nothing else needs to change.
  */
 
-export const galleryCategories = [
-  "Repairs",
-  "Installations",
-  "Painting",
-  "Flooring",
-  "Doors",
-  "Maintenance",
-] as const;
-
-export type GalleryCategory = (typeof galleryCategories)[number];
+const yelp = (id: string) => `https://s3-media0.fl.yelpcdn.com/bphoto/${id}/o.jpg`;
 
 export type GalleryItem = {
   src: string;
   alt: string;
   title: string;
-  category: GalleryCategory;
+  category: string;
 };
 
 export const galleryItems: GalleryItem[] = [
   {
-    src: "/images/home-repair-detail.jpg",
-    alt: "Close-up of a completed home repair with clean finishing",
-    title: "General Home Repair",
-    category: "Repairs",
-  },
-  {
-    src: "/images/door-installation.jpg",
-    alt: "Interior door installed and adjusted with new hardware",
-    title: "Door Installation & Hardware",
-    category: "Doors",
-  },
-  {
-    src: "/images/laminate-flooring.jpg",
-    alt: "Laminate flooring installed with clean baseboard transitions",
-    title: "Laminate Flooring",
-    category: "Flooring",
-  },
-  {
-    src: "/images/furniture-assembly.jpg",
-    alt: "Assembled furniture placed neatly in a bedroom",
-    title: "Furniture Assembly",
+    src: yelp("jBWLe__bUF1nExKw36pAzA"),
+    alt: "Kitchen range hood installed under white cabinets, before and after",
+    title: "Kitchen Hood Installation",
     category: "Installations",
   },
   {
-    src: "/images/property-maintenance.jpg",
-    alt: "Rental unit refreshed during tenant turnover maintenance",
-    title: "Rental Turnover Maintenance",
-    category: "Maintenance",
+    src: yelp("8wvuAipS-7wPc-N_3oh-Cg"),
+    alt: "Old bathroom ceiling light replaced with a modern four-shade fixture",
+    title: "Light Fixture Upgrade",
+    category: "Installations",
   },
   {
-    src: "/images/drywall-repair-after.jpg",
-    alt: "Wall surface after drywall patching and paint touch-up",
-    title: "Drywall & Paint Touch-Up",
+    src: yelp("NPz61Fnu4v9qCWXM8xxV4A"),
+    alt: "Garage wall patched, primed and repainted around a mini-split unit",
+    title: "Garage Wall Repair & Paint",
     category: "Painting",
+  },
+  {
+    src: yelp("yztniajG0b4IGn93QJMWEg"),
+    alt: "Assembled ladder shelf and locking storage cabinet in an office",
+    title: "Office Furniture Assembly",
+    category: "Installations",
+  },
+  {
+    src: yelp("uiXUYvqmt4m93djZCYl15A"),
+    alt: "Corroded outdoor faucet replaced with a new brass hose bib",
+    title: "Outdoor Faucet Replacement",
+    category: "Repairs",
+  },
+  {
+    src: yelp("9G5ue7ktmdWeL1hpPICF0Q"),
+    alt: "New exterior utility door installed and trimmed on a stucco wall",
+    title: "Exterior Door Installation",
+    category: "Doors",
+  },
+  {
+    src: yelp("O0PxiVOP6n-E_KT6N42ryA"),
+    alt: "Old stained utility sink replaced with a clean freestanding unit",
+    title: "Utility Sink Replacement",
+    category: "Repairs",
   },
 ];
 
-/** Before/after pairs shown with the comparison slider. */
-export const beforeAfterPairs = [
-  {
-    before: "/images/drywall-repair-before.jpg",
-    after: "/images/drywall-repair-after.jpg",
-    beforeAlt: "Damaged drywall before patching",
-    afterAlt: "Smooth painted wall after drywall repair",
-    title: "Drywall Repair",
+/** Featured single-image shots reused across the site. */
+export const featuredImages = {
+  hero: {
+    src: yelp("bMI-Srjz62xIM376eLxIYQ"),
+    alt: "Freshly painted apartment balcony walkway in Los Angeles, railing and clean blue floor",
   },
-];
+  owner: {
+    src: yelp("XLSIReav3Nka3AsQDY8mow"),
+    alt: "Dmitrii, owner of Home Hero Handyman, giving a thumbs up on job sites in Los Angeles",
+  },
+  maintenance: {
+    src: yelp("cmCJ6ZhgKJUW7tjSe-pjfQ"),
+    alt: "Rental garage wall repaired and repainted during unit turnover, before and after",
+  },
+};
+
+/**
+ * Before/after pairs for the interactive slider. Requires two separate photos
+ * taken from the same angle. Add pairs here when you have them — all
+ * before/after sections appear automatically.
+ */
+export const beforeAfterPairs: {
+  before: string;
+  after: string;
+  beforeAlt: string;
+  afterAlt: string;
+  title: string;
+}[] = [];
