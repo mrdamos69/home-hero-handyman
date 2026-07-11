@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import YelpBadge from "@/components/YelpBadge";
 import { business } from "@/config/business";
+import { featuredImages } from "@/config/gallery";
 
 export default function Hero() {
   return (
@@ -41,13 +42,9 @@ export default function Hero() {
         </div>
 
         <div className="relative aspect-[4/3] overflow-hidden rounded-card bg-charcoal-soft lg:aspect-[5/4]">
-          {/*
-            Replace /public/images/hero-handyman-work.jpg with a real photo of
-            your own clean, finished work — see public/images/README.md.
-          */}
           <Image
-            src="/images/hero-handyman-work.jpg"
-            alt="Neat, finished handyman work in a modern Los Angeles home interior"
+            src={featuredImages.hero.src}
+            alt={featuredImages.hero.alt}
             fill
             priority
             sizes="(min-width: 1024px) 45vw, 100vw"

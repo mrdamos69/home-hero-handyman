@@ -3,24 +3,27 @@
 import Image from "next/image";
 import { useState } from "react";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
-import {
-  beforeAfterPairs,
-  galleryCategories,
-  galleryItems,
-} from "@/config/gallery";
+import { beforeAfterPairs, galleryItems } from "@/config/gallery";
 
-const filters = ["All", ...galleryCategories, "Before & After"] as const;
-type Filter = (typeof filters)[number];
+// Filters are derived from the projects that actually exist, so a category
+// never renders an empty grid.
+const itemCategories = Array.from(new Set(galleryItems.map((i) => i.category)));
+const filters = [
+  "All",
+  ...itemCategories,
+  ...(beforeAfterPairs.length > 0 ? ["Before & After"] : []),
+];
 
 export default function GalleryGrid({ preview = false }: { preview?: boolean }) {
-  const [active, setActive] = useState<Filter>("All");
+  const [active, setActive] = useState("All");
 
   const items =
     active === "All"
       ? galleryItems
       : galleryItems.filter((item) => item.category === active);
   const visibleItems = preview ? items.slice(0, 6) : items;
-  const showBeforeAfter = active === "All" || active === "Before & After";
+  const showBeforeAfter =
+    beforeAfterPairs.length > 0 && (active === "All" || active === "Before & After");
   const showGridItems = active !== "Before & After";
 
   return (
@@ -36,10 +39,10 @@ export default function GalleryGrid({ preview = false }: { preview?: boolean }) 
             type="button"
             aria-pressed={active === filter}
             onClick={() => setActive(filter)}
-            className={`min-h-[44px] rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+            className={`min-h-[44px] whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-colors ${
               active === filter
                 ? "bg-charcoal text-cream"
-                : "bg-white text-ink hover:bg-stone border border-charcoal/10"
+                : "border border-charcoal/10 bg-white text-ink hover:bg-stone"
             }`}
           >
             {filter}
@@ -54,7 +57,7 @@ export default function GalleryGrid({ preview = false }: { preview?: boolean }) 
               key={item.src + item.title}
               className="group overflow-hidden rounded-card border border-charcoal/5 bg-white shadow-sm"
             >
-              <div className="relative aspect-[4/3] overflow-hidden bg-stone">
+              <div className="relative aspect-square overflow-hidden bg-stone">
                 <Image
                   src={item.src}
                   alt={item.alt}
@@ -63,9 +66,9 @@ export default function GalleryGrid({ preview = false }: { preview?: boolean }) 
                   className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                 />
               </div>
-              <div className="flex items-center justify-between px-4 py-3">
+              <div className="flex items-center justify-between gap-2 px-4 py-3">
                 <h3 className="text-sm font-semibold text-charcoal">{item.title}</h3>
-                <span className="rounded-full bg-stone px-2.5 py-1 text-xs font-medium text-ink-soft">
+                <span className="whitespace-nowrap rounded-full bg-stone px-2.5 py-1 text-xs font-medium text-ink-soft">
                   {item.category}
                 </span>
               </div>

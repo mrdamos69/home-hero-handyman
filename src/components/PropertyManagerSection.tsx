@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Icon from "@/components/Icon";
 import Reveal from "@/components/Reveal";
+import { featuredImages } from "@/config/gallery";
 
 const tasks = [
   "Move-in and move-out repairs",
@@ -23,8 +24,8 @@ export default function PropertyManagerSection() {
         <Reveal className="order-2 lg:order-1">
           <div className="relative aspect-[4/3] overflow-hidden rounded-card bg-stone">
             <Image
-              src="/images/property-maintenance.jpg"
-              alt="Well-maintained rental apartment interior after turnover repairs"
+              src={featuredImages.maintenance.src}
+              alt={featuredImages.maintenance.alt}
               fill
               sizes="(min-width: 1024px) 45vw, 100vw"
               className="object-cover"

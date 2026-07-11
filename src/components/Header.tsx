@@ -16,13 +16,13 @@ export default function Header() {
         <Logo light />
 
         <nav aria-label="Main navigation" className="hidden lg:block">
-          <ul className="flex items-center gap-1">
+          <ul className="flex items-center gap-0.5 xl:gap-1">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
                   aria-current={pathname === link.href ? "page" : undefined}
-                  className={`rounded-btn px-3 py-2 text-sm transition-colors ${
+                  className={`whitespace-nowrap rounded-btn px-2 py-2 text-sm transition-colors xl:px-3 ${
                     pathname === link.href
                       ? "text-amber"
                       : "text-cream/80 hover:text-cream"
@@ -35,16 +35,19 @@ export default function Header() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex shrink-0 items-center gap-3">
           {business.phone && business.phoneHref && (
             <a
               href={`tel:${business.phoneHref}`}
-              className="hidden text-sm font-semibold text-cream hover:text-amber xl:block"
+              className="hidden whitespace-nowrap text-sm font-semibold text-cream hover:text-amber min-[1360px]:block"
             >
               {business.phone}
             </a>
           )}
-          <Link href="/estimate" className="btn-primary hidden lg:inline-flex">
+          <Link
+            href="/estimate"
+            className="btn-primary hidden !px-4 lg:inline-flex xl:!px-6"
+          >
             {business.cta.primary}
           </Link>
           <MobileMenu />
