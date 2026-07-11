@@ -36,9 +36,16 @@ export default function GalleryPage() {
         <div className="wrap">
           <GalleryGrid />
           <p className="mt-10 text-sm text-ink-soft">
-            Photos shown are placeholders until real project photos are added.
-            All published project photos are shared with client permission and
-            without personal information.
+            All photos show our own completed projects. See dozens more on our{" "}
+            <a
+              href="https://www.yelp.com/biz_photos/home-hero-handyman-los-angeles"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-amber-dark underline hover:text-charcoal"
+            >
+              Yelp photo gallery
+            </a>
+            . Published photos never include clients&apos; personal information.
           </p>
         </div>
       </section>
