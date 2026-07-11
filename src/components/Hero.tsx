@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import YelpBadge from "@/components/YelpBadge";
 import { business } from "@/config/business";
 
 export default function Hero() {
@@ -7,6 +8,9 @@ export default function Hero() {
     <section className="bg-charcoal text-cream">
       <div className="wrap grid items-center gap-10 py-16 sm:py-20 lg:grid-cols-2 lg:gap-14 lg:py-24">
         <div>
+          <div className="mb-5">
+            <YelpBadge dark />
+          </div>
           <h1 className="text-4xl font-bold leading-[1.08] tracking-tight text-cream sm:text-5xl lg:text-[3.4rem]">
             Reliable Handyman Services for Your Home or Property
           </h1>
@@ -19,12 +23,20 @@ export default function Hero() {
             <Link href="/estimate" className="btn-primary">
               {business.cta.primary}
             </Link>
-            <Link href="/services" className="btn-outline-light">
-              View Services
-            </Link>
+            {business.phoneHref ? (
+              <a href={`tel:${business.phoneHref}`} className="btn-outline-light">
+                {business.cta.call}
+                {business.phone ? ` ${business.phone}` : ""}
+              </a>
+            ) : (
+              <Link href="/services" className="btn-outline-light">
+                View Services
+              </Link>
+            )}
           </div>
           <p className="mt-6 text-sm text-cream/55">
-            Serving Los Angeles homeowners, rental properties and small businesses.
+            Serving Los Angeles homeowners, rental properties and small businesses
+            {business.hours ? ` · ${business.hours}` : ""}.
           </p>
         </div>
 
