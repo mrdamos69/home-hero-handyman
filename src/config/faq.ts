@@ -42,9 +42,9 @@ export const faqItems: FaqItem[] = [
       "Clear the work area if you can, make sure we'll have access to the space, and have any materials or hardware you've purchased ready. If anything is fragile or off-limits, let us know before we start.",
   },
   {
-    question: "Do you handle emergency services?",
+    question: "Do you handle urgent or after-hours requests?",
     answer:
-      "We're not an emergency service. For urgent situations like active leaks, gas issues or electrical hazards, contact a licensed emergency professional or your utility company first. For time-sensitive but non-emergency repairs, mark your request as urgent and we'll do our best to schedule you quickly.",
+      "We're available seven days a week, so if something can't wait — call or mark your request as urgent and we'll do our best to schedule you quickly. One important exception: for hazardous situations like gas odors, major leaks at the main line or sparking electrical, contact your utility company or a licensed emergency specialist first.",
   },
   {
     question: "What projects may require a licensed specialist?",

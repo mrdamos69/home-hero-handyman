@@ -16,17 +16,17 @@ export const business = {
   tagline: "Professional handyman and property maintenance services in Los Angeles.",
 
   /** Phone number in a human-readable format, e.g. "(323) 555-0100". Leave "" to hide. */
-  phone: "",
+  phone: "(213) 697-9107",
   /** Phone number for tel: links, digits only with country code, e.g. "+13235550100". */
-  phoneHref: "",
+  phoneHref: "+12136979107",
   /** Number that receives text messages (often the same as phone). Leave "" to hide. */
-  textNumber: "",
+  textNumber: "(213) 697-9107",
   /** Text number for sms: links, e.g. "+13235550100". */
-  textHref: "",
+  textHref: "+12136979107",
   /** Business email. Leave "" to hide. */
   email: "",
   /** Business hours as a display string, e.g. "Mon–Sat, 8am–6pm". Leave "" to hide. */
-  hours: "",
+  hours: "Open 24 hours, 7 days a week",
 
   mainServiceArea: "Los Angeles, CA",
 
@@ -54,8 +54,19 @@ export const business = {
   /** Social and profile links. Leave "" to hide the corresponding link. */
   social: {
     instagram: "",
-    yelp: "",
+    yelp: "https://www.yelp.com/biz/home-hero-handyman-los-angeles",
     googleBusiness: "",
+  },
+
+  /**
+   * Public review stats — shown as a trust badge with a link to the source.
+   * Keep these in sync with the live Yelp profile; set rating to "" to hide.
+   */
+  reviews: {
+    rating: "5.0",
+    count: 12,
+    source: "Yelp",
+    url: "https://www.yelp.com/biz/home-hero-handyman-los-angeles",
   },
 
   /** CTA labels used across the site. */
