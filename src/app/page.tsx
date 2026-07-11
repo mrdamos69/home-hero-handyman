@@ -10,8 +10,7 @@ import PropertyManagerSection from "@/components/PropertyManagerSection";
 import GalleryGrid from "@/components/GalleryGrid";
 import ReviewsSection from "@/components/ReviewsSection";
 import PricingSection from "@/components/PricingSection";
-import BeforeAfterSlider from "@/components/BeforeAfterSlider";
-import { beforeAfterPairs } from "@/config/gallery";
+import { featuredImages } from "@/config/gallery";
 import FAQ from "@/components/FAQ";
 import CTASection from "@/components/CTASection";
 import SectionHeading from "@/components/SectionHeading";
@@ -59,32 +58,18 @@ export default function HomePage() {
           <div className="mt-10">
             <GalleryGrid preview />
           </div>
-
-          {/* Before/after proof — a strong conversion element for repair services */}
-          {beforeAfterPairs[0] && (
-            <div className="mt-12 grid items-center gap-8 lg:grid-cols-2">
-              <div>
-                <h3 className="text-2xl font-bold tracking-tight">
-                  See the Difference One Visit Makes
-                </h3>
-                <p className="mt-3 leading-relaxed text-ink-soft">
-                  Drag the slider to compare the same wall before and after a
-                  drywall repair. Real photos of real project results replace
-                  these placeholders as new work is completed.
-                </p>
-                <Link href="/gallery" className="btn-dark mt-6">
-                  More Before &amp; After
-                </Link>
-              </div>
-              <BeforeAfterSlider
-                beforeSrc={beforeAfterPairs[0].before}
-                afterSrc={beforeAfterPairs[0].after}
-                beforeAlt={beforeAfterPairs[0].beforeAlt}
-                afterAlt={beforeAfterPairs[0].afterAlt}
-                label={beforeAfterPairs[0].title}
-              />
-            </div>
-          )}
+          <p className="mt-6 text-sm text-ink-soft">
+            Real projects, photographed on site — more on our{" "}
+            <a
+              href="https://www.yelp.com/biz_photos/home-hero-handyman-los-angeles"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-amber-dark underline hover:text-charcoal"
+            >
+              Yelp photo gallery
+            </a>
+            .
+          </p>
         </div>
       </section>
 
@@ -92,17 +77,18 @@ export default function HomePage() {
       <section className="py-16 sm:py-20" aria-labelledby="about-heading">
         <div className="wrap grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <Reveal>
-            <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-card bg-stone">
-              {/* Replace /public/images/owner-photo.jpg with a real photo of the owner */}
+            <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-card bg-stone">
               <Image
-                src="/images/owner-photo.jpg"
-                alt="Owner and handyman of Home Hero Handyman"
+                src={featuredImages.owner.src}
+                alt={featuredImages.owner.alt}
                 fill
-                sizes="(min-width: 1024px) 24rem, 100vw"
+                sizes="(min-width: 1024px) 28rem, 100vw"
                 className="object-cover"
               />
             </div>
-            <p className="mt-3 text-center text-sm font-medium text-ink-soft">Owner &amp; Handyman</p>
+            <p className="mt-3 text-center text-sm font-medium text-ink-soft">
+              Dmitrii — Owner &amp; Handyman
+            </p>
           </Reveal>
           <Reveal delay={100}>
             <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-amber-dark">
