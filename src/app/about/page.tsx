@@ -3,6 +3,7 @@ import Image from "next/image";
 import PageHeader from "@/components/PageHeader";
 import CTASection from "@/components/CTASection";
 import Icon from "@/components/Icon";
+import { featuredImages } from "@/config/gallery";
 import { breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
@@ -59,17 +60,18 @@ export default function AboutPage() {
       <section className="py-14 sm:py-16">
         <div className="wrap grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
           <div>
-            <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-card bg-stone">
-              {/* Replace /public/images/owner-photo.jpg with a real photo of the owner */}
+            <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-card bg-stone">
               <Image
-                src="/images/owner-photo.jpg"
-                alt="Owner and handyman of Home Hero Handyman"
+                src={featuredImages.owner.src}
+                alt={featuredImages.owner.alt}
                 fill
-                sizes="(min-width: 1024px) 24rem, 100vw"
+                sizes="(min-width: 1024px) 28rem, 100vw"
                 className="object-cover"
               />
             </div>
-            <p className="mt-3 text-center text-sm font-medium text-ink-soft">Owner &amp; Handyman</p>
+            <p className="mt-3 text-center text-sm font-medium text-ink-soft">
+              Dmitrii — Owner &amp; Handyman
+            </p>
           </div>
 
           <div>
