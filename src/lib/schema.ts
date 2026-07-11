@@ -23,6 +23,9 @@ export function localBusinessSchema() {
   };
   if (business.phoneHref) schema.telephone = business.phoneHref;
   if (business.email) schema.email = business.email;
+  if (business.hours.toLowerCase().includes("24 hours")) {
+    schema.openingHours = "Mo-Su 00:00-24:00";
+  }
   const sameAs = [
     business.social.instagram,
     business.social.yelp,
