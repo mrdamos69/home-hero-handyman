@@ -127,7 +127,7 @@ export async function POST(req: NextRequest) {
     // Preferred: Resend (supports photo attachments) — set RESEND_API_KEY.
     // Fallback: FormSubmit.co (no account needed, text fields only).
     const apiKey = process.env.RESEND_API_KEY;
-    const deliveryEmail = process.env.ESTIMATE_TO_EMAIL || "dmitrii.chichkanov.93@gmail.com";
+    const deliveryEmail = process.env.ESTIMATE_TO_EMAIL || "homeherohandymanllc@gmail.com";
 
     if (!apiKey) {
       const fields: Record<string, string> = {};
