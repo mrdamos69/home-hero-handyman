@@ -68,9 +68,9 @@ export const featuredImages = {
     src: yelp("bMI-Srjz62xIM376eLxIYQ"),
     alt: "Freshly painted apartment balcony walkway in Los Angeles, railing and clean blue floor",
   },
-  owner: {
-    src: yelp("XLSIReav3Nka3AsQDY8mow"),
-    alt: "Dmitrii, owner of Home Hero Handyman, giving a thumbs up on job sites in Los Angeles",
+  about: {
+    src: yelp("8wvuAipS-7wPc-N_3oh-Cg"),
+    alt: "Bathroom lighting upgraded by the Home Hero Handyman team — before and after",
   },
   maintenance: {
     src: yelp("cmCJ6ZhgKJUW7tjSe-pjfQ"),
