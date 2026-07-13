@@ -5,16 +5,23 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        charcoal: "#1C1B18",
-        "charcoal-soft": "#2A2823",
+        // Brand palette derived from the Home Hero logo:
+        // navy banner, gold star / wooden scrolls, teal "HANDYMAN" plate.
+        charcoal: "#16324F",
+        "charcoal-soft": "#1F4166",
         cream: "#FAF7F2",
-        stone: "#EDE7DD",
-        ink: "#3A3833",
-        "ink-soft": "#6B675F",
+        stone: "#EAE9E0",
+        ink: "#33404E",
+        "ink-soft": "#5F6B77",
         amber: {
-          DEFAULT: "#C8933A",
-          dark: "#A97A2C",
-          light: "#E3B96C",
+          DEFAULT: "#DCA733",
+          dark: "#A87C1B",
+          light: "#EFC968",
+        },
+        teal: {
+          DEFAULT: "#2FB7C4",
+          dark: "#1D7B85",
+          light: "#A6E1E7",
         },
       },
       fontFamily: {
