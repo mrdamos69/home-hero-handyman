@@ -9,18 +9,18 @@ export default function Hero() {
     <section className="bg-charcoal text-cream">
       <div className="wrap grid items-center gap-10 py-16 sm:py-20 lg:grid-cols-2 lg:gap-14 lg:py-24">
         <div>
-          <div className="mb-5">
+          <div className="animate-rise mb-5">
             <YelpBadge dark />
           </div>
-          <h1 className="text-4xl font-bold leading-[1.08] tracking-tight text-cream sm:text-5xl lg:text-[3.4rem]">
+          <h1 className="animate-rise anim-delay-100 text-4xl font-bold leading-[1.08] tracking-tight text-cream sm:text-5xl lg:text-[3.4rem]">
             Reliable Handyman Services for Your Home or Property
           </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-cream/75">
+          <p className="animate-rise anim-delay-200 mt-6 max-w-xl text-lg leading-relaxed text-cream/75">
             From repairs and installations to ongoing property maintenance, Home
             Hero Handyman helps homeowners, landlords and property managers
             complete projects with clear communication and attention to detail.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="animate-rise anim-delay-300 mt-8 flex flex-wrap gap-3">
             <Link href="/estimate" className="btn-primary">
               {business.cta.primary}
             </Link>
@@ -35,13 +35,13 @@ export default function Hero() {
               </Link>
             )}
           </div>
-          <p className="mt-6 text-sm text-cream/55">
+          <p className="animate-rise anim-delay-400 mt-6 text-sm text-cream/55">
             Serving Los Angeles homeowners, rental properties and small businesses
             {business.hours ? ` · ${business.hours}` : ""}.
           </p>
         </div>
 
-        <div className="relative aspect-[4/3] overflow-hidden rounded-card bg-charcoal-soft lg:aspect-[5/4]">
+        <div className="animate-photo anim-delay-200 relative aspect-[4/3] overflow-hidden rounded-card bg-charcoal-soft lg:aspect-[5/4]">
           <Image
             src={featuredImages.hero.src}
             alt={featuredImages.hero.alt}

@@ -13,7 +13,7 @@ const reviews = [
     area: "Los Angeles",
     date: "March 2025",
     summary:
-      "A roof turbine vent broke just as rain was starting. Dmitrii moved his schedule up, showed the damaged part, picked up a replacement and had it installed the same morning.",
+      "A roof turbine vent broke just as rain was starting. The Home Hero team moved the schedule up, showed the damaged part, picked up a replacement and had it installed the same morning.",
     job: "Roof vent replacement",
   },
   {
@@ -21,7 +21,7 @@ const reviews = [
     area: "West Hollywood",
     date: "March 2025",
     summary:
-      "A previous handyman left a door installation half-finished. Dmitrii showed up on time, completed the job quickly and charged a fair price — now the go-to for future work.",
+      "A previous handyman left a door installation half-finished. Home Hero showed up on time, completed the job quickly and charged a fair price — now the go-to for future work.",
     job: "Door installation",
   },
   {

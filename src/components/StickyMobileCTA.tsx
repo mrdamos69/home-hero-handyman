@@ -8,7 +8,7 @@ import { business } from "@/config/business";
  */
 export default function StickyMobileCTA() {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-charcoal/10 bg-white/95 backdrop-blur md:hidden">
+    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-charcoal/10 bg-white/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden">
       <div className="mx-auto flex max-w-md items-stretch gap-2 px-3 py-2">
         {business.phoneHref && (
           <a
