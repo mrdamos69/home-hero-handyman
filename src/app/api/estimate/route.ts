@@ -125,9 +125,10 @@ export async function POST(req: NextRequest) {
 
     // --- Send -----------------------------------------------------------------
     // Preferred: Resend (supports photo attachments) — set RESEND_API_KEY.
-    // Fallback: FormSubmit.co (no account needed, text fields only).
+    // Fallback: the browser posts the validated fields to FormSubmit.co
+    // (their endpoint rejects server-to-server requests with 403, so the
+    // client performs the delivery after this route approves the submission).
     const apiKey = process.env.RESEND_API_KEY;
-    const deliveryEmail = process.env.ESTIMATE_TO_EMAIL || "homeherohandymanllc@gmail.com";
 
     if (!apiKey) {
       const fields: Record<string, string> = {};
@@ -136,29 +137,9 @@ export async function POST(req: NextRequest) {
         const text = String(value).trim();
         if (text) fields[key] = text;
       });
-      fields._subject = `New project request from ${name}`;
-      fields.attachments_note =
-        files.length > 0
-          ? `${files.length} photo(s) were attached on the site but can't be forwarded by this email service. Configure RESEND_API_KEY to receive attachments.`
-          : "No photos attached.";
-
-      try {
-        const res = await fetch(
-          `https://formsubmit.co/ajax/${encodeURIComponent(deliveryEmail)}`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json", Accept: "application/json" },
-            body: JSON.stringify(fields),
-          }
-        );
-        if (!res.ok) throw new Error(`FormSubmit responded ${res.status}`);
-        return NextResponse.json({ ok: true });
-      } catch (err) {
-        console.error("[estimate] FormSubmit error:", err);
-        console.log("[estimate] Submission (fallback log):", fields, `attachments: ${files.length}`);
-        // Don't lose the lead UX-wise; the submission is at least logged.
-        return NextResponse.json({ ok: true, logged: true });
-      }
+      // Always keep a server-side copy of the lead in the function logs.
+      console.log("[estimate] Lead (delivered via client FormSubmit):", fields, `attachments: ${files.length}`);
+      return NextResponse.json({ ok: true, forward: true });
     }
 
     const { Resend } = await import("resend");
