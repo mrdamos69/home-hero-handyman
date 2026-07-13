@@ -3,6 +3,33 @@
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { serviceCategories } from "@/config/services";
+import { FORMSUBMIT_ENDPOINT } from "@/config/delivery";
+
+/** Browser-side delivery via FormSubmit (their API blocks server calls). */
+async function forwardToFormSubmit(data: FormData, subject: string) {
+  const fields: Record<string, string> = {};
+  let attachments = 0;
+  data.forEach((value, key) => {
+    if (value instanceof File) {
+      if (value.size > 0) attachments += 1;
+      return;
+    }
+    if (key.startsWith("_")) return;
+    const text = String(value).trim();
+    if (text) fields[key] = text;
+  });
+  fields._subject = subject;
+  fields._template = "table";
+  if (attachments > 0) {
+    fields.attachments_note = `${attachments} photo(s) attached on the site (not forwarded by email — ask the client to text them, or configure Resend).`;
+  }
+  const res = await fetch(FORMSUBMIT_ENDPOINT, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify(fields),
+  });
+  if (!res.ok) throw new Error(`FormSubmit ${res.status}`);
+}
 
 const MAX_FILES = 8;
 const MAX_FILE_MB = 10;
@@ -63,6 +90,17 @@ export default function EstimateForm() {
       const json = await res.json();
       if (!res.ok || !json.ok) {
         throw new Error(json.error || "Something went wrong.");
+      }
+      if (json.forward) {
+        try {
+          await forwardToFormSubmit(
+            data,
+            `New project request from ${String(data.get("name") || "website")}`
+          );
+        } catch (err) {
+          // The lead is already logged server-side; don't block the user.
+          console.error("FormSubmit delivery failed:", err);
+        }
       }
       setStatus("success");
       form.reset();

@@ -2,6 +2,25 @@
 
 import Link from "next/link";
 import { useRef, useState } from "react";
+import { FORMSUBMIT_ENDPOINT } from "@/config/delivery";
+
+/** Browser-side delivery via FormSubmit (their API blocks server calls). */
+async function forwardToFormSubmit(data: FormData, subject: string) {
+  const fields: Record<string, string> = {};
+  data.forEach((value, key) => {
+    if (value instanceof File || key.startsWith("_")) return;
+    const text = String(value).trim();
+    if (text) fields[key] = text;
+  });
+  fields._subject = subject;
+  fields._template = "table";
+  const res = await fetch(FORMSUBMIT_ENDPOINT, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify(fields),
+  });
+  if (!res.ok) throw new Error(`FormSubmit ${res.status}`);
+}
 
 const MAX_FILES = 8;
 const MAX_FILE_MB = 10;
@@ -26,6 +45,16 @@ export default function PropertyManagerForm() {
       const res = await fetch("/api/estimate", { method: "POST", body: data });
       const json = await res.json();
       if (!res.ok || !json.ok) throw new Error(json.error || "Something went wrong.");
+      if (json.forward) {
+        try {
+          await forwardToFormSubmit(
+            data,
+            `Property maintenance inquiry from ${String(data.get("name") || "website")}`
+          );
+        } catch (err) {
+          console.error("FormSubmit delivery failed:", err);
+        }
+      }
       setStatus("success");
       form.reset();
     } catch (err) {
