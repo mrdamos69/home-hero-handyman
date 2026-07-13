@@ -123,14 +123,42 @@ export async function POST(req: NextRequest) {
     });
     const html = `<h2 style="font-family:sans-serif">New project request</h2><table style="font-family:sans-serif;font-size:14px">${rows.join("")}</table><p style="font-family:sans-serif;font-size:12px;color:#6B675F">Attachments: ${files.length}</p>`;
 
-    // --- Send or demo mode ----------------------------------------------------
+    // --- Send -----------------------------------------------------------------
+    // Preferred: Resend (supports photo attachments) — set RESEND_API_KEY.
+    // Fallback: FormSubmit.co (no account needed, text fields only).
     const apiKey = process.env.RESEND_API_KEY;
+    const deliveryEmail = process.env.ESTIMATE_TO_EMAIL || "dmitrii.chichkanov.93@gmail.com";
+
     if (!apiKey) {
-      console.log("[estimate] DEMO MODE — configure RESEND_API_KEY to receive emails.");
-      console.log("[estimate] Submission:", Object.fromEntries(
-        Array.from(data.entries()).filter(([k, v]) => !(v instanceof File) && !skip.has(k))
-      ), `attachments: ${files.length}`);
-      return NextResponse.json({ ok: true, demo: true });
+      const fields: Record<string, string> = {};
+      data.forEach((value, key) => {
+        if (skip.has(key) || value instanceof File) return;
+        const text = String(value).trim();
+        if (text) fields[key] = text;
+      });
+      fields._subject = `New project request from ${name}`;
+      fields.attachments_note =
+        files.length > 0
+          ? `${files.length} photo(s) were attached on the site but can't be forwarded by this email service. Configure RESEND_API_KEY to receive attachments.`
+          : "No photos attached.";
+
+      try {
+        const res = await fetch(
+          `https://formsubmit.co/ajax/${encodeURIComponent(deliveryEmail)}`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json", Accept: "application/json" },
+            body: JSON.stringify(fields),
+          }
+        );
+        if (!res.ok) throw new Error(`FormSubmit responded ${res.status}`);
+        return NextResponse.json({ ok: true });
+      } catch (err) {
+        console.error("[estimate] FormSubmit error:", err);
+        console.log("[estimate] Submission (fallback log):", fields, `attachments: ${files.length}`);
+        // Don't lose the lead UX-wise; the submission is at least logged.
+        return NextResponse.json({ ok: true, logged: true });
+      }
     }
 
     const { Resend } = await import("resend");
