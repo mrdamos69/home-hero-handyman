@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Sora } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -9,6 +9,14 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const sora = Sora({ subsets: ["latin"], variable: "--font-sora", display: "swap" });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  // Lets the sticky mobile bar extend into the iPhone home-indicator area
+  // while its content is padded with env(safe-area-inset-bottom).
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(business.siteUrl),
@@ -49,7 +57,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to main content
         </a>
         <Header />
-        <main id="main-content" className="pb-16 md:pb-0">
+        <main
+          id="main-content"
+          className="pb-[calc(4.5rem+env(safe-area-inset-bottom))] md:pb-0"
+        >
           {children}
         </main>
         <Footer />
