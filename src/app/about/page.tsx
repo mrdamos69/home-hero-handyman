@@ -62,15 +62,15 @@ export default function AboutPage() {
           <div>
             <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-card bg-stone">
               <Image
-                src={featuredImages.owner.src}
-                alt={featuredImages.owner.alt}
+                src={featuredImages.about.src}
+                alt={featuredImages.about.alt}
                 fill
                 sizes="(min-width: 1024px) 28rem, 100vw"
                 className="object-cover"
               />
             </div>
             <p className="mt-3 text-center text-sm font-medium text-ink-soft">
-              Dmitrii — Owner &amp; Handyman
+              Careful work, documented on every job
             </p>
           </div>
 
