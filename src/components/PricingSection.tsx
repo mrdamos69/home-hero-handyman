@@ -54,7 +54,7 @@ export default function PricingSection() {
             <ul className="grid gap-4 sm:grid-cols-2">
               {points.map((point) => (
                 <li key={point.title} className="card">
-                  <span className="mb-3 flex h-10 w-10 items-center justify-center rounded-btn bg-amber/15 text-amber-dark">
+                  <span className="mb-3 flex h-10 w-10 items-center justify-center rounded-btn bg-teal/15 text-teal-dark">
                     <Icon name={point.icon} className="h-5 w-5" />
                   </span>
                   <h3 className="font-semibold">{point.title}</h3>

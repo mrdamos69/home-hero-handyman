@@ -17,7 +17,7 @@ export default function ContactSection() {
     <div className="grid gap-5 sm:grid-cols-2">
       {business.phone && business.phoneHref && (
         <a href={`tel:${business.phoneHref}`} className="card flex items-center gap-4 hover:shadow-md">
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-amber/15 text-amber-dark">
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-teal/15 text-teal-dark">
             <Icon name="phone" className="h-5 w-5" />
           </span>
           <span>
@@ -29,7 +29,7 @@ export default function ContactSection() {
 
       {business.textNumber && business.textHref && (
         <a href={`sms:${business.textHref}`} className="card flex items-center gap-4 hover:shadow-md">
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-amber/15 text-amber-dark">
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-teal/15 text-teal-dark">
             <Icon name="message" className="h-5 w-5" />
           </span>
           <span>
@@ -41,7 +41,7 @@ export default function ContactSection() {
 
       {business.email && (
         <a href={`mailto:${business.email}`} className="card flex items-center gap-4 hover:shadow-md">
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-amber/15 text-amber-dark">
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-teal/15 text-teal-dark">
             <Icon name="chat" className="h-5 w-5" />
           </span>
           <span>
@@ -52,7 +52,7 @@ export default function ContactSection() {
       )}
 
       <div className="card flex items-center gap-4">
-        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-amber/15 text-amber-dark">
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-teal/15 text-teal-dark">
           <Icon name="building" className="h-5 w-5" />
         </span>
         <span>
@@ -63,7 +63,7 @@ export default function ContactSection() {
 
       {business.hours && (
         <div className="card flex items-center gap-4">
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-amber/15 text-amber-dark">
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-teal/15 text-teal-dark">
             <Icon name="calendar" className="h-5 w-5" />
           </span>
           <span>
