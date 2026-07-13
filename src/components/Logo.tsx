@@ -8,7 +8,7 @@ export default function Logo({ light = false }: { light?: boolean }) {
   return (
     <Link
       href="/"
-      aria-label="Home Hero Handyman LLC — home"
+      aria-label="Home Hero Handyman — home"
       className="inline-flex items-center gap-2.5"
     >
       <svg
@@ -34,7 +34,7 @@ export default function Logo({ light = false }: { light?: boolean }) {
             light ? "text-cream/60" : "text-ink-soft"
           }`}
         >
-          HANDYMAN LLC
+          HANDYMAN
         </span>
       </span>
     </Link>

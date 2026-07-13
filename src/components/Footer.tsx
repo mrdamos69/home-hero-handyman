@@ -87,7 +87,7 @@ export default function Footer() {
       <div className="border-t border-cream/10">
         <div className="wrap flex flex-col gap-2 py-5 text-xs text-cream/50 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            &copy; {year} {business.legalName}. All rights reserved.
+            &copy; {year} {business.name}. All rights reserved.
           </p>
           <p>Serving Los Angeles and nearby areas.</p>
         </div>

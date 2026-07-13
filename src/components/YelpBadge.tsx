@@ -6,7 +6,7 @@ import { business } from "@/config/business";
  * unverifiable numbers.
  */
 export default function YelpBadge({ dark = false }: { dark?: boolean }) {
-  const { rating, count, source, url } = business.reviews;
+  const { rating, source, url } = business.reviews;
   if (!rating || !url) return null;
 
   return (
@@ -19,7 +19,7 @@ export default function YelpBadge({ dark = false }: { dark?: boolean }) {
           ? "border-cream/20 bg-cream/5 text-cream hover:border-amber"
           : "border-charcoal/10 bg-white text-charcoal hover:border-amber"
       }`}
-      aria-label={`Rated ${rating} out of 5 from ${count} reviews on ${source} — opens in a new tab`}
+      aria-label={`Rated ${rating} out of 5 on ${source} — opens in a new tab`}
     >
       <span className="flex" aria-hidden="true">
         {[0, 1, 2, 3, 4].map((i) => (
@@ -29,9 +29,6 @@ export default function YelpBadge({ dark = false }: { dark?: boolean }) {
         ))}
       </span>
       {rating} on {source}
-      <span className={dark ? "font-normal text-cream/60" : "font-normal text-ink-soft"}>
-        ({count} reviews)
-      </span>
     </a>
   );
 }
