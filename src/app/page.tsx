@@ -19,7 +19,7 @@ import { faqItems } from "@/config/faq";
 import { faqSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Home Hero Handyman LLC | Handyman Services in Los Angeles",
+  title: "Home Hero Handyman | Handyman Services in Los Angeles",
   description:
     "Professional handyman services for home repairs, installations and property maintenance in Los Angeles. Send your project details and request an estimate.",
   alternates: { canonical: "/" },

@@ -13,22 +13,22 @@ const sora = Sora({ subsets: ["latin"], variable: "--font-sora", display: "swap"
 export const metadata: Metadata = {
   metadataBase: new URL(business.siteUrl),
   title: {
-    default: "Home Hero Handyman LLC | Handyman Services in Los Angeles",
-    template: "%s | Home Hero Handyman LLC",
+    default: "Home Hero Handyman | Handyman Services in Los Angeles",
+    template: "%s | Home Hero Handyman",
   },
   description:
     "Professional handyman services for home repairs, installations and property maintenance in Los Angeles. Send your project details and request an estimate.",
   openGraph: {
     type: "website",
     siteName: business.name,
-    title: "Home Hero Handyman LLC | Handyman Services in Los Angeles",
+    title: "Home Hero Handyman | Handyman Services in Los Angeles",
     description:
       "Professional handyman services for home repairs, installations and property maintenance in Los Angeles.",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Home Hero Handyman LLC | Handyman Services in Los Angeles",
+    title: "Home Hero Handyman | Handyman Services in Los Angeles",
     description:
       "Professional handyman services for home repairs, installations and property maintenance in Los Angeles.",
   },
