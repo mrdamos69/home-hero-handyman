@@ -10,8 +10,10 @@
  */
 
 export const business = {
-  name: "Home Hero Handyman LLC",
+  /** Public brand name (no legal suffix — friendlier for clients). */
+  name: "Home Hero Handyman",
   shortName: "Home Hero Handyman",
+  /** Legal entity name — used only in the Privacy Policy. */
   legalName: "HOME HERO HANDYMAN LLC",
   tagline: "Professional handyman and property maintenance services in Los Angeles.",
 
