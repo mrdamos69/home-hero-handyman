@@ -96,7 +96,7 @@ export default function AboutPage() {
             <ul className="mt-6 space-y-5">
               {values.map((v) => (
                 <li key={v.title} className="flex gap-4">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-amber/15 text-amber-dark">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-teal/15 text-teal-dark">
                     <Icon name={v.icon} className="h-5 w-5" />
                   </span>
                   <div>
