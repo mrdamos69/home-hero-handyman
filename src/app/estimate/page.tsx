@@ -47,7 +47,7 @@ export default function EstimatePage() {
             <ul className="space-y-4">
               {tips.map((tip) => (
                 <li key={tip.text} className="flex gap-3">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-amber/15 text-amber-dark">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-teal/15 text-teal-dark">
                     <Icon name={tip.icon} className="h-5 w-5" />
                   </span>
                   <p className="text-sm leading-relaxed text-ink-soft">{tip.text}</p>
