@@ -62,15 +62,19 @@ export const galleryItems: GalleryItem[] = [
   },
 ];
 
-/** Featured single-image shots reused across the site. */
+/**
+ * Featured single-image shots reused across the site.
+ * The mascot illustrations are generated brand art; they are decoded from
+ * src/assets/*.b64 into /public/images at build time (scripts/build-logo.mjs).
+ */
 export const featuredImages = {
   hero: {
-    src: yelp("bMI-Srjz62xIM376eLxIYQ"),
-    alt: "Freshly painted apartment balcony walkway in Los Angeles, railing and clean blue floor",
+    src: "/images/mascot-hero.jpg",
+    alt: "Home Hero mascot — a friendly handyman superhero in navy uniform with a golden cape, standing in front of a Los Angeles home",
   },
   about: {
-    src: yelp("8wvuAipS-7wPc-N_3oh-Cg"),
-    alt: "Bathroom lighting upgraded by the Home Hero Handyman team — before and after",
+    src: "/images/mascot-about.jpg",
+    alt: "Home Hero mascot giving a thumbs up with a golden toolbox in a freshly renovated living room",
   },
   maintenance: {
     src: yelp("cmCJ6ZhgKJUW7tjSe-pjfQ"),
