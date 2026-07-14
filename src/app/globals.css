@@ -179,27 +179,28 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* --- Highlight text: gold marker sweep under the first h1 word --- */
+/* --- Highlight text: full gold marker sweep over the first h1 word --- */
 .fx-highlight {
   position: relative;
   z-index: 0;
   white-space: nowrap;
+  transition: color 0.35s ease 0.3s;
 }
 
 .fx-highlight::after {
   content: "";
   position: absolute;
-  left: -0.06em;
-  right: -0.06em;
-  bottom: 0.04em;
-  height: 0.32em;
+  inset: 0 -0.12em;
   z-index: -1;
-  border-radius: 3px;
-  background: linear-gradient(90deg, #dca733, #efc968);
-  opacity: 0.85;
+  border-radius: 0.14em;
+  background: linear-gradient(100deg, #dca733, #efc968);
   transform: scaleX(0);
   transform-origin: 0 50%;
   transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fx-highlight.fx-in {
+  color: #16324f;
 }
 
 .fx-highlight.fx-in::after {
@@ -339,6 +340,10 @@
   }
   .fx-highlight::after {
     transform: scaleX(1);
+    transition: none;
+  }
+  .fx-highlight {
+    color: #16324f;
     transition: none;
   }
   .fx-shimmer {
