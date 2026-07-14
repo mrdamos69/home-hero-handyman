@@ -17,6 +17,31 @@ import { useEffect } from "react";
  */
 export default function AnimateFX() {
   useEffect(() => {
+    // Defer all DOM mutations until after the page has fully loaded so we
+    // never race React hydration (avoids React #418/#422 mismatches on
+    // streamed / selectively-hydrated content).
+    let cleanup: (() => void) | undefined;
+    let bootTimer = 0;
+    const boot = () => {
+      bootTimer = window.setTimeout(() => {
+        cleanup = init();
+      }, 300);
+    };
+    if (document.readyState === "complete") boot();
+    else window.addEventListener("load", boot, { once: true });
+
+    return () => {
+      window.removeEventListener("load", boot);
+      window.clearTimeout(bootTimer);
+      if (cleanup) cleanup();
+    };
+  }, []);
+
+  return null;
+}
+
+function init(): () => void {
+  {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const finePointer = window.matchMedia("(pointer: fine)").matches;
 
@@ -257,7 +282,5 @@ export default function AnimateFX() {
       mo.disconnect();
       window.clearTimeout(debounce);
     };
-  }, []);
-
-  return null;
+  }
 }
