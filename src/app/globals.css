@@ -134,3 +134,224 @@
     }
   }
 }
+
+/* ==========================================================================
+   Animate UI–inspired effect layer (applied at runtime by AnimateFX.tsx).
+   Kept OUTSIDE Tailwind @layer blocks on purpose: these class names are
+   added by JavaScript, so Tailwind's content scanner must not purge them.
+   ========================================================================== */
+
+/* --- Scroll progress bar --- */
+#fx-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 120;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, #dca733, #efc968 55%, #2fb7c4);
+  pointer-events: none;
+}
+
+/* --- Splitting text: staggered word rise with blur --- */
+.fx-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.55em);
+  filter: blur(6px);
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--fx-d, 0ms);
+  will-change: transform, filter;
+}
+
+.fx-in .fx-word {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+[data-fx-count] {
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Highlight text: gold marker sweep under the first h1 word --- */
+.fx-highlight {
+  position: relative;
+  z-index: 0;
+  white-space: nowrap;
+}
+
+.fx-highlight::after {
+  content: "";
+  position: absolute;
+  left: -0.06em;
+  right: -0.06em;
+  bottom: 0.04em;
+  height: 0.32em;
+  z-index: -1;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #dca733, #efc968);
+  opacity: 0.85;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fx-highlight.fx-in::after {
+  transform: scaleX(1);
+}
+
+/* --- Shimmering text (uppercase eyebrows) --- */
+@keyframes fx-shimmer {
+  0% { background-position: 180% 0; }
+  100% { background-position: -20% 0; }
+}
+
+.fx-shimmer {
+  background-image: linear-gradient(
+    110deg,
+    currentColor 42%,
+    rgba(255, 255, 255, 0.95) 50%,
+    currentColor 58%
+  );
+  background-size: 220% 100%;
+  background-position: 180% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fx-shimmer 3.4s linear 1s infinite;
+}
+
+/* --- Buttons: liquid fill + ripple + magnetic-friendly transitions --- */
+.fx-btn {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.2s ease,
+    background-position 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.2s ease,
+    box-shadow 0.3s ease;
+}
+
+.fx-btn:active {
+  transform: scale(0.97) !important;
+}
+
+/* Liquid fill (bottom-up) for solid buttons */
+.btn-primary.fx-btn {
+  background-image: linear-gradient(to top, #efc968 50%, #dca733 50%);
+  background-size: 100% 205%;
+  background-position: 0 0;
+}
+
+.btn-primary.fx-btn:hover {
+  background-position: 0 100%;
+  box-shadow: 0 8px 22px -8px rgba(220, 167, 51, 0.65);
+}
+
+.btn-dark.fx-btn {
+  background-image: linear-gradient(to top, #1f4166 50%, #16324f 50%);
+  background-size: 100% 205%;
+  background-position: 0 0;
+}
+
+.btn-dark.fx-btn:hover {
+  background-position: 0 100%;
+  box-shadow: 0 8px 22px -8px rgba(22, 50, 79, 0.55);
+}
+
+.btn-outline.fx-btn:hover,
+.btn-outline-light.fx-btn:hover {
+  box-shadow: 0 6px 18px -8px rgba(22, 50, 79, 0.35);
+}
+
+/* Ripple */
+@keyframes fx-ripple {
+  to {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.fx-ripple {
+  position: absolute;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.45);
+  transform: scale(0);
+  opacity: 0.6;
+  animation: fx-ripple 0.65s ease-out forwards;
+  pointer-events: none;
+}
+
+.btn-dark .fx-ripple,
+.btn-outline-light .fx-ripple {
+  background: rgba(250, 247, 242, 0.35);
+}
+
+/* --- Cards: tilt + shine --- */
+.fx-tilt {
+  position: relative;
+  transform-style: preserve-3d;
+  transition:
+    transform 0.2s ease-out,
+    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fx-tilt:hover {
+  box-shadow: 0 18px 40px -18px rgba(22, 50, 79, 0.35);
+}
+
+.fx-shine {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+}
+
+/* --- Image zoom inside rounded, overflow-hidden containers --- */
+.fx-zoomimg {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.fx-zoomwrap:hover .fx-zoomimg {
+  transform: scale(1.05);
+}
+
+/* --- Reduced motion: neutralize the whole FX layer --- */
+@media (prefers-reduced-motion: reduce) {
+  #fx-progress {
+    display: none;
+  }
+  .fx-word {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+  .fx-highlight::after {
+    transform: scaleX(1);
+    transition: none;
+  }
+  .fx-shimmer {
+    animation: none;
+    background-image: none;
+    -webkit-text-fill-color: currentColor;
+  }
+  .fx-zoomwrap:hover .fx-zoomimg,
+  .fx-tilt,
+  .fx-btn {
+    transform: none !important;
+  }
+  .fx-ripple {
+    display: none;
+  }
+}

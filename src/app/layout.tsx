@@ -3,6 +3,7 @@ import { Inter, Sora } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
+import AnimateFX from "@/components/AnimateFX";
 import { business } from "@/config/business";
 import { localBusinessSchema } from "@/lib/schema";
 import "./globals.css";
@@ -65,6 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         <Footer />
         <StickyMobileCTA />
+        <AnimateFX />
       </body>
     </html>
   );
