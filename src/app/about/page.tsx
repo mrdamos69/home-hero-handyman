@@ -7,9 +7,9 @@ import { featuredImages } from "@/config/gallery";
 import { breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "About Home Hero Handyman",
+  title: "About Home Hero Service",
   description:
-    "Home Hero Handyman provides dependable repairs, installations and property maintenance in Los Angeles — with clear communication and respect for your home.",
+    "Home Hero Service provides dependable repairs, installations and property maintenance in Los Angeles — with clear communication and respect for your home.",
   alternates: { canonical: "/about" },
 };
 
@@ -78,7 +78,7 @@ export default function AboutPage() {
             <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Why Home Hero Exists</h2>
             <div className="mt-4 space-y-4 text-lg leading-relaxed text-ink-soft">
               <p>
-                Home Hero Handyman was created to provide homeowners and
+                Home Hero Service was created to provide homeowners and
                 property professionals with a more dependable way to handle
                 repairs, installations and maintenance projects. Finding one
                 reliable person for a list of small and mid-sized tasks
