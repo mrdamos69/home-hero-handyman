@@ -82,7 +82,7 @@ export const business = {
   },
 
   /** Public site URL — used for canonical links, sitemap and Open Graph. */
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://www.homeherohandyman.example",
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://home-hero-service.com",
 } as const;
 
 export type Business = typeof business;
