@@ -9,7 +9,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Contact Home Hero Handyman — call, text or send project details online. Serving Los Angeles, CA and nearby areas.",
+    "Contact Home Hero Service — call, text or send project details online. Serving Los Angeles, CA and nearby areas.",
   alternates: { canonical: "/contact" },
 };
 
