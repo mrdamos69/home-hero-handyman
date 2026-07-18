@@ -1,5 +1,5 @@
 /**
- * Central business data for Home Hero Handyman LLC.
+ * Central business data for Home Hero Service (HOME HERO HANDYMAN LLC).
  *
  * Edit this file to update contact details, service areas, hours and
  * social links across the entire site. Every component reads from here —
@@ -11,11 +11,11 @@
 
 export const business = {
   /** Public brand name (no legal suffix — friendlier for clients). */
-  name: "Home Hero Handyman",
-  shortName: "Home Hero Handyman",
+  name: "Home Hero Service",
+  shortName: "Home Hero Service",
   /** Legal entity name — used only in the Privacy Policy. */
   legalName: "HOME HERO HANDYMAN LLC",
-  tagline: "Professional handyman and property maintenance services in Los Angeles.",
+  tagline: "Professional home repair and property maintenance services in Los Angeles.",
 
   /** Phone number in a human-readable format, e.g. "(323) 555-0100". Leave "" to hide. */
   phone: "(213) 697-9107",
