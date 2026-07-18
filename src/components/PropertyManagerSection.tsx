@@ -41,7 +41,7 @@ export default function PropertyManagerSection() {
             Reliable Maintenance Support for Rental Properties
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-ink-soft">
-            Home Hero Handyman provides practical repair and maintenance support
+            Home Hero Service provides practical repair and maintenance support
             for apartments, rental homes and small residential properties. We
             help property owners and managers address punch lists, tenant
             turnover tasks and ongoing maintenance needs.

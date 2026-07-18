@@ -13,11 +13,11 @@ export default function Hero() {
             <YelpBadge dark />
           </div>
           <h1 className="animate-rise anim-delay-100 text-4xl font-bold leading-[1.08] tracking-tight text-cream sm:text-5xl lg:text-[3.4rem]">
-            Reliable Handyman Services for Your Home or Property
+Reliable Home &amp; Property Services in Los Angeles
           </h1>
           <p className="animate-rise anim-delay-200 mt-6 max-w-xl text-lg leading-relaxed text-cream/75">
             From repairs and installations to ongoing property maintenance, Home
-            Hero Handyman helps homeowners, landlords and property managers
+            Hero Service helps homeowners, landlords and property managers
             complete projects with clear communication and attention to detail.
           </p>
           <div className="animate-rise anim-delay-300 mt-8 flex flex-wrap gap-3">

@@ -125,7 +125,7 @@ export default function EstimateForm() {
         </svg>
         <h2 className="mt-4 text-2xl font-bold">Request Received</h2>
         <p className="mx-auto mt-3 max-w-md text-ink-soft">
-          Thank you for contacting Home Hero Handyman. Your project request has
+          Thank you for contacting Home Hero Service. Your project request has
           been received. We will review the details and contact you to discuss
           the next steps.
         </p>
