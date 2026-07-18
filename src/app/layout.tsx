@@ -3,7 +3,6 @@ import { Inter, Sora } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
-import AnimateFX from "@/components/AnimateFX";
 import { business } from "@/config/business";
 import { localBusinessSchema } from "@/lib/schema";
 import "./globals.css";
@@ -22,24 +21,35 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(business.siteUrl),
   title: {
-    default: "Home Hero Handyman | Handyman Services in Los Angeles",
-    template: "%s | Home Hero Handyman",
+    default: "Home Hero Service | Handyman & Property Services in Los Angeles",
+    template: "%s | Home Hero Service",
   },
   description:
-    "Professional handyman services for home repairs, installations and property maintenance in Los Angeles. Send your project details and request an estimate.",
+    "Professional home repair, handyman and property maintenance services in Los Angeles. Send your project details and request a free estimate.",
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     siteName: business.name,
-    title: "Home Hero Handyman | Handyman Services in Los Angeles",
+    url: business.siteUrl,
+    title: "Home Hero Service | Handyman & Property Services in Los Angeles",
     description:
-      "Professional handyman services for home repairs, installations and property maintenance in Los Angeles.",
+      "Professional home repair, handyman and property maintenance services in Los Angeles.",
     locale: "en_US",
+    images: [
+      {
+        url: "/images/mascot-hero.jpg",
+        width: 1200,
+        height: 800,
+        alt: "Home Hero Service — reliable home and property services in Los Angeles",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Home Hero Handyman | Handyman Services in Los Angeles",
+    title: "Home Hero Service | Handyman & Property Services in Los Angeles",
     description:
-      "Professional handyman services for home repairs, installations and property maintenance in Los Angeles.",
+      "Professional home repair, handyman and property maintenance services in Los Angeles.",
+    images: ["/images/mascot-hero.jpg"],
   },
 };
 
@@ -66,7 +76,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         <Footer />
         <StickyMobileCTA />
-        <AnimateFX />
       </body>
     </html>
   );

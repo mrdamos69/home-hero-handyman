@@ -19,9 +19,9 @@ import { faqItems } from "@/config/faq";
 import { faqSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Home Hero Handyman | Handyman Services in Los Angeles",
+  title: "Home Hero Service | Handyman & Property Services in Los Angeles",
   description:
-    "Professional handyman services for home repairs, installations and property maintenance in Los Angeles. Send your project details and request an estimate.",
+    "Professional home repair, handyman and property maintenance services in Los Angeles. Send your project details and request a free estimate.",
   alternates: { canonical: "/" },
 };
 
@@ -98,7 +98,7 @@ export default function HomePage() {
               Your Home Deserves Careful, Professional Work
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-ink-soft">
-              Home Hero Handyman was created to provide homeowners and property
+              Home Hero Service was created to provide homeowners and property
               professionals with a more dependable way to handle repairs,
               installations and maintenance projects. Every project is
               approached with clear communication, practical problem-solving
