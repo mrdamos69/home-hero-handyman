@@ -8,7 +8,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Service Areas — Handyman in Los Angeles & Nearby",
   description:
-    "Home Hero Handyman serves Los Angeles and nearby areas including North Hollywood, Burbank, Glendale, Studio City, Sherman Oaks and surrounding neighborhoods.",
+    "Home Hero Service serves Los Angeles and nearby areas including North Hollywood, Burbank, Glendale, Studio City, Sherman Oaks and surrounding neighborhoods.",
   alternates: { canonical: "/service-areas" },
 };
 
