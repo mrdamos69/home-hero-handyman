@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { DELIVERY_EMAIL } from "@/config/delivery";
 
 /**
  * Estimate/contact form handler.
@@ -21,6 +22,17 @@ const ALLOWED_TYPES = new Set([
   "video/mp4",
   "video/quicktime",
   "application/pdf",
+]);
+const ALLOWED_EXTENSIONS = new Set([
+  "jpg",
+  "jpeg",
+  "png",
+  "webp",
+  "heic",
+  "heif",
+  "mp4",
+  "mov",
+  "pdf",
 ]);
 
 // Simple in-memory rate limit: max 5 submissions / 10 minutes per IP.
@@ -61,9 +73,11 @@ export async function POST(req: NextRequest) {
       // Pretend success so bots don't learn anything.
       return NextResponse.json({ ok: true });
     }
-    // Time check: humans need more than 3 seconds to fill the form.
+    // Time check: humans need more than 3 seconds to fill the form. The
+    // client always sends _elapsed, so a missing value means the POST
+    // bypassed the form entirely — treat both cases as bots.
     const elapsed = Number(data.get("_elapsed") || 0);
-    if (elapsed > 0 && elapsed < 3000) {
+    if (elapsed < 3000) {
       return NextResponse.json({ ok: true });
     }
 
@@ -102,7 +116,12 @@ export async function POST(req: NextRequest) {
           { status: 400 }
         );
       }
-      if (file.type && !ALLOWED_TYPES.has(file.type)) {
+      // Some browsers send an empty MIME type (e.g. for HEIC) — fall back
+      // to the file extension so those uploads aren't rejected, while files
+      // that match neither list are.
+      const ext = file.name.toLowerCase().match(/\.([a-z0-9]+)$/)?.[1] ?? "";
+      const extOk = ALLOWED_EXTENSIONS.has(ext);
+      if (file.type ? !ALLOWED_TYPES.has(file.type) : !extOk) {
         return NextResponse.json(
           { ok: false, error: `"${file.name}" is not a supported file format.` },
           { status: 400 }
@@ -153,7 +172,7 @@ export async function POST(req: NextRequest) {
 
     const { error } = await resend.emails.send({
       from: process.env.ESTIMATE_FROM_EMAIL || "onboarding@resend.dev",
-      to: process.env.ESTIMATE_TO_EMAIL || email,
+      to: process.env.ESTIMATE_TO_EMAIL || DELIVERY_EMAIL,
       replyTo: email,
       subject: `New project request from ${name}`,
       html,

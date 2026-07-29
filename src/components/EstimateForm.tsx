@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 import { serviceCategories } from "@/config/services";
 import { FORMSUBMIT_ENDPOINT } from "@/config/delivery";
+import { business } from "@/config/business";
 
 /** Browser-side delivery via FormSubmit (their API blocks server calls). */
 async function forwardToFormSubmit(data: FormData, subject: string) {
@@ -29,6 +30,12 @@ async function forwardToFormSubmit(data: FormData, subject: string) {
     body: JSON.stringify(fields),
   });
   if (!res.ok) throw new Error(`FormSubmit ${res.status}`);
+  // FormSubmit reports failures (e.g. an unactivated form) with HTTP 200
+  // and success:"false" in the body — treat those as delivery failures too.
+  const json = await res.json().catch(() => null);
+  if (!json || String(json.success) !== "true") {
+    throw new Error(json?.message || "FormSubmit rejected the submission");
+  }
 }
 
 const MAX_FILES = 8;
@@ -98,8 +105,14 @@ export default function EstimateForm() {
             `New project request from ${String(data.get("name") || "website")}`
           );
         } catch (err) {
-          // The lead is already logged server-side; don't block the user.
+          // Email delivery failed — be honest instead of showing a success
+          // screen for a request nobody will receive.
           console.error("FormSubmit delivery failed:", err);
+          setStatus("error");
+          setErrorMsg(
+            `We couldn't send your request right now. Please call or text us at ${business.phone} — or try again in a few minutes.`
+          );
+          return;
         }
       }
       setStatus("success");
