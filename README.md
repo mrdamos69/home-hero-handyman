@@ -1,7 +1,18 @@
-# Home Hero Handyman LLC — Website
+# Service request web application
 
-Production-ready marketing site for a Los Angeles handyman business.
+A marketing and service-request application for a Los Angeles service business.
 Built with **Next.js 14 (App Router) · TypeScript · Tailwind CSS**.
+
+## Engineering overview
+
+- Configurable services, service areas and request forms.
+- Server-side request validation, attachment limits, honeypot and timing checks.
+- Email delivery through Resend, with a browser-side FormSubmit fallback.
+- Basic in-memory rate limiting, structured error responses and SEO metadata.
+
+This repository demonstrates customer intake and email delivery. It does not
+include an LLM agent, automated pricing or appointment booking. Those are
+separate capabilities, not part of the public web implementation.
 
 ## Quick start
 
@@ -10,9 +21,10 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:3000. The site works out of the box — the estimate form
-runs in demo mode (simulated success, submissions logged to the server
-console) until you configure email.
+Open http://localhost:3000. Before submitting a form, review delivery settings
+in `src/config/delivery.ts`. Without a Resend key, the browser can still send
+real submissions through FormSubmit; this is not an isolated demo mode. Use
+synthetic data and a recipient you control for testing.
 
 ## 1. Edit your business data (do this first)
 
@@ -25,9 +37,9 @@ Everything editable lives in **`src/config/`**:
 | `src/config/faq.ts` | FAQ questions and answers |
 | `src/config/gallery.ts` | Gallery projects and before/after pairs |
 
-Phone, text, email, hours and social links ship **empty**. Any empty field is
-automatically hidden on the site (no `[PLACEHOLDER]` text ever shows), and the
-Call/Text buttons appear as soon as you fill the numbers in:
+Review the existing business configuration before reusing the application.
+Empty contact fields are hidden, and Call/Text buttons depend on configured
+numbers. Example values for your own deployment:
 
 ```ts
 phone: "(323) 555-0100",   // shown to visitors
@@ -43,8 +55,8 @@ Service Areas page, footer and SEO schema update automatically.
 
 ## 2. Replace the images
 
-All images live in `public/images/` and currently contain labeled
-placeholders. See **`public/images/README.md`** for exactly what to shoot,
+Public images live in `public/images/`. Review the existing assets and their
+permissions before reusing them. See **`public/images/README.md`** for what to shoot,
 recommended sizes, before/after tips, and privacy/permission guidance.
 
 To add gallery projects: drop photos into `public/images/` and add entries to
@@ -70,8 +82,15 @@ NEXT_PUBLIC_SITE_URL=https://www.yourdomain.com
 
 4. Restart the dev server. Submissions (with photo attachments) now arrive by email.
 
-Without `RESEND_API_KEY`, the route stays in demo mode: it validates input,
-logs the submission server-side and returns a success message — nothing breaks.
+Without `RESEND_API_KEY`, the route validates the request, logs its fields and
+returns a forwarding instruction. The browser then sends text fields to the
+FormSubmit endpoint configured in `src/config/delivery.ts`. That fallback does
+not forward uploaded files; configure Resend when attachments are needed.
+
+The rate limiter uses process memory, so it is not a shared or durable control
+across serverless instances. Review logging, recipient configuration, privacy
+and retention before handling real customer data. Neither a local API success
+response nor a build proves that an email reached the recipient.
 
 ## 4. Deploy to Vercel
 
@@ -87,7 +106,7 @@ Every push to your main branch redeploys automatically.
 
 1. In the Vercel project: **Settings → Domains → Add** → enter `yourdomain.com`.
 2. At your domain registrar, add the DNS records Vercel shows you
-   (an `A` record to `76.76.21.21` for the apex, `CNAME cname.vercel-dns.com` for `www`).
+   for your domain; use the current records shown in the dashboard.
 3. Wait for DNS to propagate (minutes to a few hours). Vercel issues HTTPS automatically.
 4. Set `NEXT_PUBLIC_SITE_URL` to the final domain and redeploy — this fixes
    canonical URLs, the sitemap and Open Graph links.
@@ -102,7 +121,7 @@ src/
 │   ├── property-maintenance/
 │   ├── about/  gallery/  service-areas/
 │   ├── estimate/  contact/  privacy-policy/
-│   ├── api/estimate/route.ts   # Form handler (Resend or demo mode)
+│   ├── api/estimate/route.ts   # Validation, Resend or browser-forwarding response
 │   ├── sitemap.ts  robots.ts   # Auto-generated sitemap.xml / robots.txt
 │   ├── not-found.tsx  loading.tsx  error.tsx
 │   └── layout.tsx  globals.css  icon.svg
